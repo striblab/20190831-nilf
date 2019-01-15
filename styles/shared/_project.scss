@@ -90,6 +90,11 @@ h2 {
 }
 
 .slide {
+
+	width:800px;
+	margin-left:auto;
+	margin-right:auto;
+
 	.byline a {
 		color: #888 !important;
 	}
@@ -148,17 +153,27 @@ h2 {
 		font-size: 13px;
 		font-family: Arial;
 	  }
-	@media (max-width:800px) {
-		#wrapper,
-		.slide {
-			width: 100%;
+	  .city-label {
+		font-size: 0.45em;
+		fill: white;
+		font-family: "Benton Sans";
+		text-shadow: 1px 0 5px black;
+		pointer-events:none;
+	  
+		@supports (-ms-ime-align:auto) {
+		  fill:#333;
+		}
+		.label-bg {
+			pointer-events: none;
+			font-size:0.4em !important;
+			text-anchor: middle;
+			fill: none;
+			stroke: #ffffff;
+			text-shadow: 0 0 3px #fff;
+			opacity: 1;
 		}
 	}
-	@media (max-width:500px) {
-		#wrapper {
-			width: 100%;
-		}
-	}
+	
 	/*RED SHADED RAMP*/
 	.red1 {
 		fill: #F2AC93;

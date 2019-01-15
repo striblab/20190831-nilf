@@ -50,4 +50,15 @@ $selector-wrapper: '.strib-styles.ssa.ssb.ssc';
 		padding: 0 7px;
 		margin-bottom: 3px;
 		display: inline-block;
+  }
+  
+  @media (max-width:800px) {
+		#wrapper, .slide, .container-lg, .map {
+			width: 100% !important;
+		}
+	}
+	@media (max-width:500px) {
+		#wrapper {
+			width: 100%;
+		}
 	}
