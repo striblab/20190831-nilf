@@ -46,8 +46,6 @@ class Map {
         var height = $(self.target).outerHeight();
         var centered;
 
-        var data = turnout.counties;
-
         var path = d3.geoPath(projection);
 
         var svg = d3.select(self.target + " svg").attr("width", width).attr("height", height);
@@ -132,27 +130,13 @@ class Map {
             .style("stroke-width", '1')
             .style("stroke", "#ffffff")
             .style("fill", function(d) {
-                var votes;
-                for (var i = 0; i < data.length; i++) {
-                    if (d.properties.COUNTYNAME == data[i].county) {
-                        votes = data[i].total_pct;
-                    }
-                }
+                var votes = 0;
                 return self.colorScale(votes);
             })
             .call(tooltip(function(d, i) {
                 var votes;
                 var diff;
                 var color = "#000000";
-                for (var i = 0; i < data.length; i++) {
-                    if (d.properties.COUNTYNAME == data[i].county) {
-                        votes = data[i].TURNOUT18;
-                        diff = data[i].DIFF;
-                    }
-                }
-                if (votes > 0.25) {
-                    color = "#ffffff";
-                }
 
                 return "<h4 id='title'>" + d.properties.COUNTYNAME + "</h4><div id='shifter' class='" + (diff >= 0.01 ? 'p' : 'n') + "'>" + d3.format('+.0%')(diff) + " change since 2014</div><div><span class='legendary' style='color:" + color + "; background-color:" + self.colorScale2(votes) + ";'>" + d3.format(".1%")(votes) + "</span> turnout</div>";
             }));
