@@ -128,10 +128,11 @@ class Map {
                 return "P" + d.properties.COUNTYFIPS;
             })
             .style("stroke-width", '1')
-            .style("stroke", "#ffffff")
+            .style("stroke", "#000000")
             .style("fill", function(d) {
-                var votes = 0;
-                return self.colorScale(votes);
+                // var votes = 0;
+                // return self.colorScale(votes);
+                return "#dddddd";
             })
             .call(tooltip(function(d, i) {
                 var votes;
