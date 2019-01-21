@@ -15,15 +15,6 @@ class BigMap {
 
     var data = jsonData.counties;
 
-    var aspect = 800 / 500,
-        chart = $(self.target + " svg");
-
-    $(window).on("resize", function() {
-        var targetWidth = chart.parent().width();
-        chart.attr("width", targetWidth);
-        chart.attr("height", targetWidth / aspect);
-    });
-
     function mapColor(d, subject, dataCompare) {
         for (var i = 0; i < dataCompare.length; i++) {
             if (Number(d.properties.GEOID) == Number(dataCompare[i].Id2)) {
@@ -84,27 +75,11 @@ class BigMap {
             };
         };
 
-        if (geo == "country") {
-            var width = 800,
-                height = 500,
-                centered;
-            var projection = d3.geoAlbers().scale(1000).translate([400, 260]);
-        } else if (geo == "us") {
-            var width = 800,
-                height = 500,
-                centered;
-            var projection = d3.geoAlbers().scale(2000).translate([330, 430]);
-        } else if (geo == "mn") {
-            var width = 350,
-                height = 500,
-                centered;
-            var projection = d3.geoAlbers().scale(5037).translate([50, 970]);
-        } else if (geo == "metro") {
-            var width = 350,
-                height = 350,
-                centered;
-            var projection = d3.geoMercator().scale([16500]).center([-92.403259, 44.988113]);
-        }
+        var width = 800,
+        height = 500,
+        centered;
+        
+        var projection = d3.geoAlbersUsa().scale(1000).translate([400, 260]);
 
         var path = d3.geoPath()
             .projection(projection);
@@ -206,31 +181,6 @@ class BigMap {
                     .attr("id", "state-borders")
                     .attr("d", path);
 
-                // svg.selectAll("circle")
-                //   .data(marks)
-                //   .enter()
-                //   .append("circle")
-                //   .attr('class','mark')
-                //   .attr('width', 10)
-                //   .attr('height', 10)
-                //   .attr("r", "1.3px")
-                //   .attr("fill", "#333")
-                //   .attr("transform", function(d) {return "translate(" + projection([d.long,d.lat]) + ")";});
-
-                // svg.insert("path", ".graticule")
-                //   .datum(topojson.mesh(st, st.objects.us_states, function(a, b) { return a !== b; }))
-                //   .attr("class", "state-boundary")
-                //   .style("stroke-width", "1.2px")
-                //   .attr("d", path);
-
-                // svg.selectAll("text")
-                //   .data(marks)
-                //   .enter()
-                //   .append("text")
-                //   .attr('class','city-label')
-                //   .attr("transform", function(d) {return "translate(" + projection([d.long+.23,d.lat-.09]) + ")";})
-                //   .text(function(d) { return " " + d.name; });
-
 
         var zoom = d3.zoom()
             .on("zoom", function() {
@@ -310,6 +260,15 @@ class BigMap {
     }
 
     mapBuild("#country", "#districtName", "#chart", "us_counties.json", "labor", "country", data, 2, 1);
+
+    var aspect = 800 / 500,
+    chart = $(self.target + " svg");
+
+    $(window).on("resize", function() {
+        var targetWidth = chart.parent().width();
+        chart.attr("width", targetWidth);
+        chart.attr("height", targetWidth / aspect);
+    });
 
     var targetWidth = chart.parent().width();
     chart.attr("width", targetWidth);
