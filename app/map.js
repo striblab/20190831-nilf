@@ -3,6 +3,7 @@ import * as d3 from 'd3';
 import * as d3tooltip from 'd3-tooltip';
 import * as topojson from 'topojson';
 import mncounties from '../sources/counties.json';
+import nilfMN from '../sources/nilf_mn.json';
 
 class Map {
 
@@ -52,6 +53,8 @@ class Map {
         var g = svg.append("g");
         var g2 = svg.append("g");
         var tooltip = d3tooltip(d3);
+
+        var data = nilfMN.mncounties;
 
         // self._render_legend();
 
