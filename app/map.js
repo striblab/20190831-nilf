@@ -14,12 +14,7 @@ class Map {
         this.g2 = this.svg.append("g");
         this.zoomed = false;
         this.scaled = $(target).width() / 520;
-        this.colorScale = d3.scaleLinear()
-            .domain([0, 0.25, 0.5])
-            .range(['#ffffff', "#8b62a8", '#271D42']);
-        this.colorScale2 = d3.scaleLinear()
-            .domain([0, 0.5, 1])
-            .range(['#ffffff', "#8b62a8", '#271D42']);
+        this.colorScale = d3.scaleLinear().domain([4, 3, 2, 1]).range(['#D1E6E1', '#67B4C2', '#3580A3', '#0D4673']);
     }
 
     /********** PRIVATE METHODS **********/
@@ -54,7 +49,7 @@ class Map {
         var g2 = svg.append("g");
         var tooltip = d3tooltip(d3);
 
-        var data = nilfMN.mncounties;
+        var dataMN = nilfMN.mncounties;
 
         // self._render_legend();
 
@@ -131,10 +126,15 @@ class Map {
                 return "P" + d.properties.COUNTYFIPS;
             })
             .style("stroke-width", '1')
-            .style("stroke", "#000000")
+            .style("stroke", "#ffffff")
             .style("fill", function(d) {
-                // var votes = 0;
-                // return self.colorScale(votes);
+
+                for (var i=0; i < dataMN.length; i++) {
+                    if (dataMN[i].Geography == d.properties.COUNTYNAME) {
+                        return self.colorScale(dataMN[i].Bucket);
+                    }
+                }
+
                 return "#dddddd";
             })
             .call(tooltip(function(d, i) {
@@ -142,7 +142,7 @@ class Map {
                 var diff;
                 var color = "#000000";
 
-                return "<h4 id='title'>" + d.properties.COUNTYNAME + "</h4><div id='shifter' class='" + (diff >= 0.01 ? 'p' : 'n') + "'>" + d3.format('+.0%')(diff) + " change since 2014</div><div><span class='legendary' style='color:" + color + "; background-color:" + self.colorScale2(votes) + ";'>" + d3.format(".1%")(votes) + "</span> turnout</div>";
+                return "<h4 id='title'>" + d.properties.COUNTYNAME + "</h4><div id='shifter' class='" + (diff >= 0.01 ? 'p' : 'n') + "'>" + d3.format('+.0%')(diff) + " change since 2014</div><div><span class='legendary' style='color:" + color + "; background-color:" + self.colorScale(votes) + ";'>" + d3.format(".1%")(votes) + "</span> turnout</div>";
             }));
 
      //City labels
