@@ -51,6 +51,8 @@ class Map {
 
         var dataMN = nilfMN.mncounties;
 
+        
+
         // self._render_legend();
 
         // Only fire resize events in the event of a width change because it prevents
@@ -130,7 +132,10 @@ class Map {
             .style("fill", function(d) {
 
                 for (var i=0; i < dataMN.length; i++) {
+                    console.log(dataMN[i].Geography);
+
                     if (dataMN[i].Geography == d.properties.COUNTYNAME) {
+                        
                         return self.colorScale(dataMN[i].Bucket);
                     }
                 }
