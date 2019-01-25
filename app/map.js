@@ -145,10 +145,18 @@ class Map {
             .call(tooltip(function(d, i) {
                 var votes;
                 var diff;
-                var color = "#000000";
+                var color = "#ffffff";
+                var nilf = 0;
 
-                return "<h4 id='title'>" + d.properties.COUNTYNAME + "</h4><div id='shifter' class='" + (diff >= 0.01 ? 'p' : 'n') + "'>" + d3.format('+.0%')(diff) + " change since 2014</div><div><span class='legendary' style='color:" + color + "; background-color:" + self.colorScale(votes) + ";'>" + d3.format(".1%")(votes) + "</span> turnout</div>";
-            }));
+                for (var i = 0; i < dataMN.length; i++) {
+                    if (dataMN[i].Geography == d.properties.COUNTYNAME) {
+                        var points = dataMN[i].Bucket;
+                        var pct = dataMN[i].PctNILF;
+                        var color_scale = d3.scaleLinear().domain([4, 3, 2, 1]).range(['#D1E6E1', '#67B4C2', '#3580A3', '#0D4673']);
+                        return "<div class='countyName'>" + d.properties.COUNTYNAME + "</div><div class='number'><span class='legendary' style='background-color:" + color_scale(points) + ";'>" + d3.format(".0%")(pct) + "</span> of middle-aged men not in labor force</div>"
+                    }
+                }
+              }));
 
      //City labels
         var marks = [{
