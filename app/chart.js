@@ -25,7 +25,7 @@ class Chart {
                 columns: [
                     ['Source',0.049019608,0.019896194,0.324394464,0.606689735]
                 ],
-                type: 'bar',
+                type: 'line',
                 labels: {
                     format: {
                         'Source': d3.format('.0%')
@@ -55,7 +55,7 @@ class Chart {
                 pattern: ['#3580A3']
             },
             axis: {
-                rotated: true,
+                // rotated: true,
                 y: {
                     max: 1,
                     min: 0, 
