@@ -63,6 +63,11 @@ section.container-lg {
 	max-width: 700px !important;
 }
 
+#chartTrend, #chartTrend .overlay {
+	// height:550px;
+	pointer-events:none !important;
+}
+
 p {
 	max-width: 520px;
 	font-size: 15px;
@@ -223,6 +228,36 @@ h2 {
 			text-shadow: 0 0 3px #fff;
 			opacity: 1;
 		}
+	}
+	
+	/*PURPLE SHADED RAMP*/
+	.purple5 {
+		fill: #4c1926;
+		background-color: #4c1926;
+		color: #ffffff;
+	}
+	
+	.purple4 {
+		fill: #693c46;
+		background-color: #693c46;
+		color: #ffffff;
+	}
+	
+	.purple3 {
+		fill: #865f67;
+		background-color: #865f67;
+		color: #ffffff;
+	}
+	
+	.purple2 {
+		fill: #a3858b;
+		background-color: #857AAA;
+		color: #ffffff;
+	}
+	
+	.purple1 {
+		fill: #C1ACB1;
+		background-color: #C1ACB1;
 	}
 	
 	/*RED SHADED RAMP*/

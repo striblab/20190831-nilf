@@ -1,9 +1,9 @@
 import 'intersection-observer';
 import jsonData from '../sources/nilf.json';
 import us from '../sources/us_counties.json';
-import st from '../sources/us_states_topo.json';
+// import st from '../sources/us_states_topo.json';
 import * as d3 from 'd3';
-import * as topojson from 'topojson';
+// import * as topojson from 'topojson';
 
 class BigMap {
     constructor(target) {
@@ -17,9 +17,9 @@ class BigMap {
 
     function mapColor(d, subject, dataCompare) {
         for (var i = 0; i < dataCompare.length; i++) {
-            if (Number(d.properties.GEOID) == Number(dataCompare[i].Id2)) {
-                var points = dataCompare[i].Bucket;
-                var color_scale = d3.scaleLinear().domain([4, 3, 2, 1]).range(['#D1E6E1', '#67B4C2', '#3580A3', '#0D4673']);
+            if (d.properties.AFFGEOID == dataCompare[i].id) {
+                var points = dataCompare[i].nilf_2017_pct / 100;
+                var color_scale = d3.scaleLinear().domain([0 ,0.2, 0.25, 0.5]).range(['#f8f8f8', '#AFA8C9', '#D9D5E6', '#271D42']);
                 return color_scale(points);
             }
         }
@@ -28,11 +28,13 @@ class BigMap {
 
     function mapTips(d, subject, dataCompare) {
         for (var i = 0; i < data.length; i++) {
-            if (Number(d.properties.GEOID) == Number(dataCompare[i].Id2)) {
-                var points = dataCompare[i].Bucket;
-                var pct = dataCompare[i].PctNILF;
-                var color_scale = d3.scaleLinear().domain([4, 3, 2, 1]).range(['#D1E6E1', '#67B4C2', '#3580A3', '#0D4673']);
-                return "<div class='countyName'>" + dataCompare[i].Geography + "</div><div class='number'><span class='legendary' style='background-color:" + color_scale(points) + ";'>" + d3.format(".0%")(pct) + "</span> of middle-aged men not in labor force</div>"
+            if (d.properties.AFFGEOID == dataCompare[i].id) {
+                var points = dataCompare[i].nilf_2017_pct / 100;
+                var pct = dataCompare[i].nilf_2017_pct / 100;
+                var color_scale = d3.scaleLinear().domain([0 ,0.2, 0.25, 0.5]).range(['#f8f8f8', '#AFA8C9', '#D9D5E6', '#271D42']);
+                var color = "#ffffff";
+                if (pct <= 0.22) { color = "#000000"; }
+                return "<div class='countyName'>" + dataCompare[i].Geography + "</div><div class='number'><span class='legendary' style='color:" + color + "; background-color:" + color_scale(points) + ";'>" + d3.format(".0%")(pct) + "</span> not in labor force</div>"
             }
         }
     }

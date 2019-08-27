@@ -14,7 +14,6 @@ class Map {
         this.g2 = this.svg.append("g");
         this.zoomed = false;
         this.scaled = $(target).width() / 520;
-        this.colorScale = d3.scaleLinear().domain([4, 3, 2, 1]).range(['#D1E6E1', '#67B4C2', '#3580A3', '#0D4673']);
     }
 
     /********** PRIVATE METHODS **********/
@@ -132,11 +131,11 @@ class Map {
             .style("fill", function(d) {
 
                 for (var i=0; i < dataMN.length; i++) {
-                    console.log(dataMN[i].Geography);
+                    // console.log(dataMN[i].Geography);
 
                     if (dataMN[i].Geography == d.properties.COUNTYNAME) {
-                        
-                        return self.colorScale(dataMN[i].Bucket);
+                        var color_scale = d3.scaleLinear().domain([-0.06,0,0.06]).range(['#822010', '#F7F7F7', '#271D42']);
+                        return color_scale(dataMN[i].diff / 100);
                     }
                 }
 
@@ -150,10 +149,12 @@ class Map {
 
                 for (var i = 0; i < dataMN.length; i++) {
                     if (dataMN[i].Geography == d.properties.COUNTYNAME) {
-                        var points = dataMN[i].Bucket;
-                        var pct = dataMN[i].PctNILF;
-                        var color_scale = d3.scaleLinear().domain([4, 3, 2, 1]).range(['#D1E6E1', '#67B4C2', '#3580A3', '#0D4673']);
-                        return "<div class='countyName'>" + d.properties.COUNTYNAME + "</div><div class='number'><span class='legendary' style='background-color:" + color_scale(points) + ";'>" + d3.format(".0%")(pct) + "</span> of middle-aged men not in labor force</div>"
+                        var pct = dataMN[i].PctNILF / 100;
+                        var diff = dataMN[i].diff;
+                        var color_scale = d3.scaleLinear().domain([-6,0,6]).range(['#822010', '#F7F7F7', '#271D42']);
+                        var color = "#ffffff";
+                        if (diff <= 0) { color = "#000000"; }
+                        return "<div class='countyName'>" + d.properties.COUNTYNAME + "</div><div class='number'><span class='legendary' style='color:" + color + "; background-color:" + color_scale(diff) + ";'>" + d3.format("+.0")(diff) + " point</span> change</div><div>" + d3.format(".0%")(pct) + " not in workforce</div>";
                     }
                 }
               }));
