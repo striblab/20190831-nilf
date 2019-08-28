@@ -1,9 +1,9 @@
 import 'intersection-observer';
 import jsonData from '../sources/nilf.json';
 import us from '../sources/us_counties.json';
-// import st from '../sources/us_states_topo.json';
+import st from '../sources/us_states_topo.json';
 import * as d3 from 'd3';
-// import * as topojson from 'topojson';
+import * as topojson from 'topojson';
 
 class BigMap {
     constructor(target) {
@@ -179,7 +179,7 @@ class BigMap {
                     }));
 
                 g.append("path")
-                    //.datum(topojson.mesh(us, us.features, function(a, b) { return a !== b; }))
+                    .datum(topojson.mesh(st, st.objects.us_states, function(a, b) { return a !== b; }))
                     .attr("id", "state-borders")
                     .attr("d", path);
 
