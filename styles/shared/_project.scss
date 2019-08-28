@@ -154,6 +154,33 @@ h2 {
 	margin-left:auto;
 	margin-right:auto;
 
+	.label {
+		font-weight:bold;
+		font-size:0.8em;
+	  }
+	  
+	  .bar {
+		height:27px;
+		margin-bottom:10px;
+		font-size:0.8em;
+	  }
+	  
+	  .bar div {
+		display:inline-block;
+		height:27px;
+		color:#ffffff;
+		font-size:0.8em;
+		font-weight:bold;
+		text-align:right;
+		padding-right:2px;
+	  }
+	  
+	.chartLabel {
+	  font-size:0.8em;
+	  text-align:left;
+	  font-weight:bold;
+	}
+
 	.byline a {
 		color: #888 !important;
 	}
@@ -234,32 +261,32 @@ h2 {
 	
 	/*PURPLE SHADED RAMP*/
 	.purple5 {
-		fill: #4c1926;
-		background-color: #4c1926;
+		fill: #413374;
+		background-color: #413374;
 		color: #ffffff;
 	}
 	
 	.purple4 {
-		fill: #693c46;
-		background-color: #693c46;
+		fill: #61538F;
+		background-color: #61538F;
 		color: #ffffff;
 	}
 	
 	.purple3 {
-		fill: #865f67;
-		background-color: #865f67;
-		color: #ffffff;
-	}
-	
-	.purple2 {
-		fill: #a3858b;
+		fill: #857AAA;
 		background-color: #857AAA;
 		color: #ffffff;
 	}
 	
+	.purple2 {
+		fill: #AFA8C9;
+		background-color: #AFA8C9;
+		color: #ffffff;
+	}
+	
 	.purple1 {
-		fill: #C1ACB1;
-		background-color: #C1ACB1;
+		fill: #D9D5E6;
+		background-color: #D9D5E6;
 	}
 	
 	/*RED SHADED RAMP*/
@@ -584,5 +611,8 @@ text {
   @media (max-width:500px) {
 	#country svg {
 		height:300px;
+	}
+	#country {
+		pointer-events:none !important;
 	}
 }
