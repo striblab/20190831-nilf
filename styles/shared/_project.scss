@@ -1,4 +1,9 @@
 //base page styles
+.content-scroll {
+	max-width: 100% !important;
+	margin: auto;
+  }
+
 p {
     -webkit-font-smoothing: antialiased;
   }
@@ -154,6 +159,7 @@ h2 {
 	width:800px;
 	margin-left:auto;
 	margin-right:auto;
+	padding:20px;
 
 	.label {
 		font-weight:bold;
