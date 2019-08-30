@@ -34,7 +34,7 @@ class BigMap {
                 var color_scale = d3.scaleLinear().domain([0 ,0.2, 0.25, 0.5]).range(['#f8f8f8', '#AFA8C9', '#D9D5E6', '#271D42']);
                 var color = "#ffffff";
                 if (pct <= 0.22) { color = "#000000"; }
-                return "<div class='countyName'>" + dataCompare[i].Geography + "</div><div class='number'><span class='legendary' style='color:" + color + "; background-color:" + color_scale(points) + ";'>" + d3.format(".0%")(pct) + "</span> not in labor force</div>"
+                return "<div class='countyName'>" + dataCompare[i].Geography + "</div><div class='number'><span class='legendary' style='color:" + color + "; background-color:" + color_scale(points) + ";'>" + d3.format(".0%")(pct) + "</span> not in workforce</div>"
             }
         }
     }
